@@ -1,0 +1,4 @@
+.vagrant
+nbproject
+vendor
+.DS_Store

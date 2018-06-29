@@ -1,0 +1,14 @@
+
+<div class="well">
+    <h3>New ingredient</h3>
+    <?php echo $this->form ?>
+</div>
+
+<hr>
+<h3>Ingredients</h3>
+<dl class="dl-horizontal">
+    <?php foreach ($this->allIngredients as $entry): ?>
+    <dt><?php echo $this->escape($entry->name) ?></dt>
+    <dd><?php echo $this->escape($entry->cost) ?> €</dd>
+    <?php endforeach; ?>
+</dl>
