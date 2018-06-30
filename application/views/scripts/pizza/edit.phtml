@@ -8,7 +8,7 @@
 <hr/>
 
 <div class="well">
-	    <h3>Edit ingredients</h3>
+	    <h3>Edit ingredients <small>(Section under construction)</small></h3>
 	    
 	    <?php echo $this->form_ingredients ?>
 
@@ -32,3 +32,29 @@
 
 		<?php endif; ?>
 </div>
+
+<hr>
+	<a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'index'
+		    ),
+		    'default',
+	    	true) ?>">listing</a> - 
+	<a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'edit',
+		        'id'		 => $this->pizza->id
+		    ),
+		    'default',
+	    	true) ?>">edit</a> -
+
+	<a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'delete',
+		        'id'		 => $this->pizza->id
+		    ),
+		    'default',
+	    	true) ?>" onClick="return confirm('Are you sure you want to delete the pizza?')">delete</a>

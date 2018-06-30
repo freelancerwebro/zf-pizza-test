@@ -22,7 +22,7 @@ class ContactController extends BaseController
                 $mapper  = new Application_Model_ContactMapper();
                 $mapper->save($contact);
 
-                $this->_helper->FlashMessenger('The message was successfully send!');
+                $this->_helper->FlashMessenger(['message' => 'The message was successfully send!']);
 
                 return $this->_helper->redirector('index');
             }
