@@ -11,16 +11,16 @@ class ErrorController extends Zend_Controller_Action
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 $this->getResponse()->setHttpResponseCode(404);
-                $this->view->message = 'Page not found';
+                $this->view->error = 'Page not found';
                 break;
             default:
                 $this->getResponse()->setHttpResponseCode(500);
-                $this->view->message = 'Application error';
+                $this->view->error = 'Application error';
                 break;
         }
 
         if ($log = $this->getLog()) {
-            $log->crit($this->view->message, $errors->exception);
+            $log->crit($this->view->error, $errors->exception);
         }
 
         if ($this->getInvokeArg('displayExceptions') == true) {
