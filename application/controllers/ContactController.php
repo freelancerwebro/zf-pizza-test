@@ -1,20 +1,10 @@
 <?php
 
-class ContactController extends Zend_Controller_Action
+require_once('BaseController.php');
+
+class ContactController extends BaseController
 {
-
-    public function init()
-    {
-        /* Initialize action controller here */
-
-        $messages = $this->_helper->flashMessenger->getMessages();
-
-		if(!empty($messages))
-		{	
-			$this->_helper->layout->getView()->message = $messages[0];
-		}
-    }
-
+    
     public function indexAction()
     {
         $form = new Application_Form_Contact();

@@ -1,16 +1,9 @@
 <?php
 
-class IngredientController extends Zend_Controller_Action
-{
-    public function init()
-    {
-        $messages = $this->_helper->flashMessenger->getMessages();
+require_once('BaseController.php');
 
-        if(!empty($messages))
-        {   
-            $this->_helper->layout->getView()->message = $messages[0];
-        }
-    }
+class IngredientController extends BaseController
+{
 
     public function indexAction()
     {

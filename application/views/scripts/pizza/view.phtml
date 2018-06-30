@@ -1,0 +1,58 @@
+<?php if(!empty($this->pizza)): ?>
+
+	<div class="well">
+	    <h3><?php echo $this->pizza->name ?></h3>
+	    
+	    <h4>Cost: <?php echo $this->pizza->cost ?></h4>
+	</div>
+
+	<hr>
+	<h3>Ingredients</h3>
+	
+	<?php if(count($this->allPizzaIngredients) > 0): ?>
+
+		<ol class="ol-horizontal">
+
+			<?php foreach ($this->allPizzaIngredients as $entry): ?>
+
+				<li>
+					<?php echo $this->escape($entry->ingredient_name) ?>: <?php echo $this->escape($entry->quantity) ?> gr
+				</li>
+
+			<?php endforeach; ?>	
+
+		</ol>
+
+	<?php else: ?>
+
+		This pizza has no ingredients yet.
+
+	<?php endif; ?>
+
+	<hr>
+	<a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'index'
+		    ),
+		    'default',
+	    	true) ?>">listing</a> - 
+	<a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'edit',
+		        'id'		 => $this->pizza->id
+		    ),
+		    'default',
+	    	true) ?>">edit</a> -
+
+	    <a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'delete',
+		        'id'		 => $this->pizza->id
+		    ),
+		    'default',
+	    	true) ?>">delete</a>
+	
+<?php endif; ?>

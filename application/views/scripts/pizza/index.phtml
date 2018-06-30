@@ -6,8 +6,39 @@
 <hr>
 <h3>Pizzas</h3>
 <dl class="dl-horizontal">
-    <?php foreach ($this->allIngredients as $entry): ?>
-    <dt><?php echo $this->escape($entry->name) ?></dt>
-    <dd><?php echo $this->escape($entry->cost) ?> €</dd>
+	
+    <?php foreach ($this->allPizzas as $entry): ?>
+    <dt><?php echo $this->escape($entry->name) ?></dt>	
+    <dd><?php echo $this->escape($entry->cost) ?> € - 
+	    <a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'view',
+		        'id'		 => $entry->id
+		    ),
+		    'default',
+	    	true) ?>">View</a> - 
+
+	    <a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'edit',
+		        'id'		 => $entry->id
+		    ),
+		    'default',
+	    	true) ?>">edit</a> -	
+
+	    <a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'delete',
+		        'id'		 => $entry->id
+		    ),
+		    'default',
+	    	true) ?>">delete</a>
+	    		
+	</dd>
+
     <?php endforeach; ?>
+    
 </dl>
