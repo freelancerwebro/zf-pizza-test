@@ -1,6 +1,6 @@
 <?php
 
-class ContactController extends Zend_Controller_Action
+class PizzaController extends Zend_Controller_Action
 {
 
     public function init()
@@ -17,25 +17,26 @@ class ContactController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $form = new Application_Form_Contact();
+        $form = new Application_Form_Pizza();
+        $pizzasTable = new Application_Model_DbTable_Pizzas();
 
         if ($this->getRequest()->isPost()) {
-
             if ($form->isValid($this->getRequest()->getPost())) {
 
                 $formValues = $form->getValues();
-                
-                $contact = new Application_Model_Contact($form->getValues());
-                $mapper  = new Application_Model_ContactMapper();
-                $mapper->save($contact);
+                $newPizza = $pizzasTable->createRow();
+                $newPizza->name = $formValues['name'];
+                $newPizza->cost = $formValues['cost'];
+                $newPizza->save();
 
-                $this->_helper->FlashMessenger('The message was successfully send!');
+                $this->_helper->FlashMessenger('The pizza has been successfully added!!');
 
                 return $this->_helper->redirector('index');
             }
         }
 
         $this->view->form = $form;
+       	$this->view->allPizzas = $pizzasTable->fetchAll();
     }
 
 

@@ -14,15 +14,20 @@
         <controllerFile controllerName="Contact">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Pizza">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false">
         <formFile formName="Contact"/>
+        <formFile formName="Pizza"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
         <dbTableDirectory>
           <dbTableFile dbTableName="Ingredients"/>
         </dbTableDirectory>
+        <modelFile modelName="Pizzas"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -35,6 +40,9 @@
             <viewScriptFile forActionName="error"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Contact">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Pizza">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
