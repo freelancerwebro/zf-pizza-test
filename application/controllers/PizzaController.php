@@ -31,15 +31,7 @@ class PizzaController extends BaseController
     public function viewAction()
     {	
     	$id = $this->_getParam('id', 1);
-    	
-    	$pizza = new Application_Model_DbTable_Pizzas();
-    	$row = $pizza->fetchRow('id = '.$id);
-
-    	if(empty($row))
-    	{
-    		$this->_helper->FlashMessenger(array('error' => "We have no pizza with this ID!"));
-    		return $this->_helper->redirector('index');
-    	}
+    	$row = $this->_getPizza($id);
 
     	$ingredientsTable = new Application_Model_DbTable_PizzaIngredients();
     	$ingredients = $ingredientsTable->getPizzaIngredients($id);
@@ -50,6 +42,32 @@ class PizzaController extends BaseController
 
     	$this->view->pizza = $row;
     	$this->view->allPizzaIngredients = $ingredients;
+    }
+
+    public function deleteAction()
+    {	
+    	$id = $this->_getParam('id', 1);
+    	$this->_getPizza($id);
+
+    	$pizza = new Application_Model_DbTable_Pizzas();
+    	$pizza->delete(["id = ?" => $id]);
+    	$this->_helper->FlashMessenger(array('message' => 'The pizza has been successfully deleted!!'));
+
+    	return $this->_helper->redirector('index');
+    }
+
+    private function _getPizza($id)
+    {	
+    	$pizza = new Application_Model_DbTable_Pizzas();
+    	$row = $pizza->fetchRow('id = '.$id);
+
+    	if(empty($row))
+    	{
+    		$this->_helper->FlashMessenger(array('error' => "We have no pizza with this ID!"));
+    		return $this->_helper->redirector('index');
+    	}
+
+    	return $row;
     }
 
 
