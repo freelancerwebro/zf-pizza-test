@@ -29,12 +29,24 @@
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/ingredient">Ingredient</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
       </div>
     </div>
 
+    
+
     <div class="container">
+        <!-- Global notification handling to use call flashMessenger action helper -->
+        <?php if(isset($this->message)) :?>
+          <div class="alert alert-success">
+
+          <?php echo $this->message ;?>
+
+          </div>    
+       <?php endif;?>
+
         <?php echo $this->layout()->content; ?>
     </div>
 
