@@ -1,9 +1,10 @@
 <?php if(!empty($this->pizza)): ?>
 
 	<div class="well">
-	    <h3><?php echo $this->pizza->name ?></h3>
+		<p>#<?php echo $this->escape($this->pizza->id) ?> </p>
+	    <h3><?php echo $this->escape($this->pizza->name) ?></h3>
 	    
-	    <h4>Cost: <?php echo $this->pizza->cost ?></h4>
+	    <h4>Cost: <?php echo $this->escape($this->pizza->cost) ?> €</h4>
 	</div>
 
 	<hr>
@@ -46,7 +47,7 @@
 		    'default',
 	    	true) ?>">edit</a> -
 
-	    <a href="<?php echo $this->url(
+	<a href="<?php echo $this->url(
 		    array(
 		        'controller' => 'pizza',
 		        'action'     => 'delete',

@@ -31,17 +31,6 @@ class Application_Form_Contact extends Zend_Form
             'rows' => 10,
         ]);
 
-        // Add a captcha
-        // $this->addElement('captcha', 'captcha', array(
-        //     'label'      => 'Please enter the 5 letters displayed below:',
-        //     'required'   => true,
-        //     'captcha'    => array(
-        //         'captcha' => 'Figlet',
-        //         'wordLen' => 5,
-        //         'timeout' => 300
-        //     )
-        // ));
-
         $this->addElement('submit', 'submit', [
             'ignore' => true,
             'class' => 'btn btn-md btn-primary',

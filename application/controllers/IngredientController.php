@@ -5,6 +5,9 @@ require_once('BaseController.php');
 class IngredientController extends BaseController
 {
 
+    /**
+    *   Display and process all the ingredients and the form.
+    */
     public function indexAction()
     {
         $form = new Application_Form_Ingredient();

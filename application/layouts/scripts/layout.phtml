@@ -42,20 +42,20 @@
       
         <!-- Global notification handling to use call flashMessenger action helper -->
         <?php if(isset($this->message)) :?>
-          <div class="alert alert-success">
+            <div class="alert alert-success">
 
-          <?php echo $this->message ;?>
+               <?php echo $this->message ;?>
 
-          </div>    
-       <?php endif;?>
+            </div>    
+        <?php endif;?>
 
-       <?php if(isset($this->error)) :?>
-          <div class="alert alert-danger">
+        <?php if(isset($this->error)) :?>
+            <div class="alert alert-danger">
 
-          <?php echo $this->error ;?>
+               <?php echo $this->error ;?>
 
-          </div>    
-       <?php endif;?>
+            </div>    
+        <?php endif;?>
 
         <?php echo $this->layout()->content; ?>
     </div>

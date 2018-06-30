@@ -5,6 +5,9 @@ require_once('BaseController.php');
 class ContactController extends BaseController
 {
     
+    /**
+    * Displays and process the Contact form on the screen.
+    */
     public function indexAction()
     {
         $form = new Application_Form_Contact();

@@ -1,0 +1,34 @@
+<div class="well">
+		<p>#<?php echo $this->escape($this->pizza->id) ?> </p>
+	    <h3>Edit pizza</h3>
+	    
+	    <?php echo $this->form ?>
+</div>
+
+<hr/>
+
+<div class="well">
+	    <h3>Edit ingredients</h3>
+	    
+	    <?php echo $this->form_ingredients ?>
+
+	    <?php if(count($this->allPizzaIngredients) > 0): ?>
+
+			<ol class="ol-horizontal">
+
+				<?php foreach ($this->allPizzaIngredients as $entry): ?>
+
+					<li>
+						<?php echo $this->escape($entry->ingredient_name) ?>: <?php echo $this->escape($entry->quantity) ?> gr
+					</li>
+
+				<?php endforeach; ?>	
+
+			</ol>
+
+		<?php else: ?>
+
+			This pizza has no ingredients yet.
+
+		<?php endif; ?>
+</div>
