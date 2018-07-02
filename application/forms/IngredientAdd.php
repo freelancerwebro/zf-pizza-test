@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_IngredientEdit extends Zend_Form
+class Application_Form_IngredientAdd extends Zend_Form
 {
 
 
@@ -22,44 +22,30 @@ class Application_Form_IngredientEdit extends Zend_Form
     public function init()
     {   
         $this->setMethod('post');
-
-        if(count($this->ingredients) > 0)
-        {   
-
-            $count = 0;
-
-            foreach ($this->ingredients as $ingredient) 
-            {
-                            
-                 $this->addElement('select', 'ingredients_'.$ingredient['ingredient_id'], [
+         
+        $this->addElement('select', 'ingredient_id', [
                     'label'      => 'Ingredient:',
                     'id'         => '',
                     'required'   => true,
                     'filters'    => ['StringTrim'],
                     'validators' => [],
-                    'multiOptions'=> [1 => "unu", 2 => "doi"],
-                    'value'      => 2
-                ]);
+                    'multiOptions'=> $this->ingredients,
+        ]);
 
-                $this->addElement('text', 'quantities_'.$ingredient['ingredient_id'], [
+        $this->addElement('text', 'quantity', [
                     'label'      => 'Quantity:',
                     'required'   => true,
                     'validators' => [],
-                    'value'      => $ingredient['quantity']
-                ]);   
-
-            }
-        }
-        
+        ]);   
         
 
-        $this->addElement('submit', 'submit2', [
+        $this->addElement('submit', 'submit_add', [
             'ignore' => true,
             'class' => 'btn btn-md btn-primary',
             'label' => 'Save',
         ]);
 
-        $this->addElement('hash', 'csrf_edit_form', array(
+        $this->addElement('hash', 'csrf_add_ingredient_form', array(
             'ignore' => true,
         ));
     }

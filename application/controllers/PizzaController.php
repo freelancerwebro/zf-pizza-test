@@ -75,13 +75,23 @@ class PizzaController extends BaseController
     	$pizzasTable = new Application_Model_DbTable_Pizzas();
     	$pizzaIngredientsTable = new Application_Model_DbTable_PizzaIngredients();
     	$ingredientsTable = new Application_Model_DbTable_Ingredients();
+
+
     	$ingredients = $pizzaIngredientsTable->getPizzaIngredients($id);
     	
     	$form = new Application_Form_Pizza($pizza->toArray());
-    	$values = $ingredients->toArray();
+    	$ingredientsArray = $ingredients->toArray();
     	$allIngredients = $ingredientsTable->getAllIngredients();
-    	//print_r($allIngredients->toArray());
-    	$form_ingredients = new Application_Form_IngredientEdit();
+    	
+    	$form_ingredients_edit = new Application_Form_IngredientEdit($ingredientsArray);
+    	$form_ingredient_add = new Application_Form_IngredientAdd($ingredientsTable->getAllIngredientsForDropdown());
+
+    	// echo "<pre>";
+    	// print_r($ingredients->toArray());
+    		
+    	// echo "</pre>";
+
+
 
     	if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
@@ -98,9 +108,10 @@ class PizzaController extends BaseController
         }
 
     	$this->view->form = $form;
-    	$this->view->form_ingredients = $form_ingredients;
+    	$this->view->form_ingredients = $form_ingredients_edit;
     	$this->view->pizza = $pizza;
     	$this->view->allPizzaIngredients = $ingredients;
+    	$this->view->form_ingredients_add = $form_ingredient_add;
     }
 
     /**

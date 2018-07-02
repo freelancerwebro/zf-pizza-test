@@ -16,4 +16,19 @@ class Application_Model_DbTable_Ingredients extends Zend_Db_Table_Abstract
 	    return $this->fetchAll($select);
 
     }
+
+    public function getAllIngredientsForDropdown()
+    {
+        $ingredients = $this->getAllIngredients();
+        $ingredientsArray = $ingredients->toArray();
+
+        $dropdownValues = [];
+
+        foreach($ingredientsArray as $ingredient)
+        {
+            $dropdownValues[$ingredient['id']] = $ingredient['name'];            
+        }
+
+        return $dropdownValues;
+    }
 }

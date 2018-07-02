@@ -8,9 +8,12 @@
 <hr/>
 
 <div class="well">
-	    <h3>Edit ingredients <small>(Section under construction)</small></h3>
+		<script>
+			//var listing = [12, 14, 20];
+		</script>
+	    <h3>Current ingredients <small>(Section under construction)</small></h3>
 	    
-	    <?php echo $this->form_ingredients ?>
+	    <?php //echo $this->form_ingredients ?>
 
 	    <?php if(count($this->allPizzaIngredients) > 0): ?>
 
@@ -20,6 +23,15 @@
 
 					<li>
 						<?php echo $this->escape($entry->ingredient_name) ?>: <?php echo $this->escape($entry->quantity) ?> gr
+						
+						-   <a href="<?php echo $this->url(
+								    array(
+								        'controller' => 'pizza',
+								        'action'     => 'delete2',
+								        'id'		 => $this->pizza->id
+								    ),
+								    'default',
+					    	true) ?>" onClick="return confirm('Are you sure you want to delete the pizza?')">delete</a>
 					</li>
 
 				<?php endforeach; ?>	
@@ -32,6 +44,15 @@
 
 		<?php endif; ?>
 </div>
+
+<hr/>
+
+<div class="well">
+	    <h3>Add ingredient to pizza</h3>
+	    
+	    <?php echo $this->form_ingredients_add ?>
+</div>
+
 
 <hr>
 	<a href="<?php echo $this->url(
@@ -58,3 +79,6 @@
 		    ),
 		    'default',
 	    	true) ?>" onClick="return confirm('Are you sure you want to delete the pizza?')">delete</a>
+
+<hr>
+
