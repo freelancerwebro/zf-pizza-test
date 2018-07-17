@@ -7,7 +7,7 @@ class Application_Model_DbTable_PizzaIngredients extends Zend_Db_Table_Abstract
     /**
     *   Get all the ingredients of a single pizza
     *
-    *  @param $pizza_id - integer  
+    *  @param $pizza_id - integer
     */
     public function getPizzaIngredients($pizza_id = null)
     {
@@ -21,5 +21,22 @@ class Application_Model_DbTable_PizzaIngredients extends Zend_Db_Table_Abstract
 
 	    return $this->fetchAll($select);
 
+    }
+
+    /**
+    *   Check if an ingredient is unique on a pizza
+    *
+    *  @param $pizza_id - integer
+    *  @param $ingredient_id - integer
+    *  @return true/false - boolean
+    */
+    public function checkIngredientIsUnique($pizza_id = null, $ingredient_id = null)
+    {
+      $row = $this->fetchRow(['pizza_id = ?' => $pizza_id, 'ingredient_id = ?' => $ingredient_id]);
+
+      if(empty($row))
+        return true;
+
+      return false;
     }
 }

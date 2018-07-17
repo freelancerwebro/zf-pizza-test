@@ -1,7 +1,7 @@
 <div class="well">
 		<p>#<?php echo $this->escape($this->pizza->id) ?> </p>
 	    <h3>Edit pizza</h3>
-	    
+
 	    <?php echo $this->form ?>
 </div>
 
@@ -12,7 +12,7 @@
 			//var listing = [12, 14, 20];
 		</script>
 	    <h3>Current ingredients <small>(Section under construction)</small></h3>
-	    
+
 	    <?php //echo $this->form_ingredients ?>
 
 	    <?php if(count($this->allPizzaIngredients) > 0): ?>
@@ -24,7 +24,7 @@
 					<li class="ui-state-default" data-id="<?php echo $this->escape($entry->id) ?>">
 						<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 						<?php echo $this->escape($entry->ingredient_name) ?>: <?php echo $this->escape($entry->quantity) ?> gr (<?php echo $this->escape($entry->ordering) ?>)
-						
+
 						-   <a href="<?php echo $this->url(
 								    array(
 								        'controller' 	=> 'pizza',
@@ -35,7 +35,7 @@
 					    	true) ?>" onClick="return confirm('Are you sure you want to delete the pizza?')">delete</a>
 					</li>
 
-				<?php endforeach; ?>	
+				<?php endforeach; ?>
 
 			</ol>
 
@@ -50,7 +50,7 @@
 
 <div class="well">
 	    <h3>Add ingredient to pizza</h3>
-	    
+
 	    <?php //echo $this->form_ingredients_add ?>
 	    <a href="<?php echo $this->url(
 		    array(
@@ -70,7 +70,7 @@
 		        'action'     => 'index'
 		    ),
 		    'default',
-	    	true) ?>">listing</a> - 
+	    	true) ?>">listing</a> -
 	<a href="<?php echo $this->url(
 		    array(
 		        'controller' => 'pizza',
@@ -90,4 +90,3 @@
 	    	true) ?>" onClick="return confirm('Are you sure you want to delete the pizza?')">delete</a>
 
 <hr>
-
