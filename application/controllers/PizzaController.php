@@ -86,17 +86,16 @@ class PizzaController extends BaseController
     	$form_ingredients_edit = new Application_Form_IngredientEdit($ingredientsArray);
     	$form_ingredient_add = new Application_Form_IngredientAdd($ingredientsTable->getAllIngredientsForDropdown());
 
-    	// echo "<pre>";
-    	// print_r($ingredients->toArray());
-    		
-    	// echo "</pre>";
-
-
 
     	if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
 
                 $formValues = $form->getValues();
+
+                // echo "<pre>";
+                // 	print_r($formValues);
+                // echo "</pre>";
+                //return false;
 
                 $pizza->name = $formValues['name'];
                 $pizza->cost = $formValues['cost'];
@@ -105,13 +104,32 @@ class PizzaController extends BaseController
                 $this->_helper->FlashMessenger(array('message' => 'The pizza has been successfully saved!!'));
                	return $this->_helper->redirector->gotoSimple('edit', 'pizza', null, ['id' => $id]);
             }
+
         }
+
 
     	$this->view->form = $form;
     	$this->view->form_ingredients = $form_ingredients_edit;
     	$this->view->pizza = $pizza;
     	$this->view->allPizzaIngredients = $ingredients;
     	$this->view->form_ingredients_add = $form_ingredient_add;
+    }
+
+    /**
+	*	Handles the delete action of the pizza.
+	*	*It requires to provide the ID of the pizza ingredient in the URL and pizza_id
+	*/
+    public function deleteingredientAction()
+    {	
+    	$id = $this->_getParam('id', 1);
+    	$pizza_id = $this->_getParam('pizza_id', 1);
+    	$pizza = $this->_getPizza($id);
+
+    	$pizza = new Application_Model_DbTable_PizzaIngredients();
+    	$pizza->delete(["id = ?" => $id]);
+    	$this->_helper->FlashMessenger(array('message' => 'The ingredient has been successfully removed from pizza!!'));
+
+    	return $this->_helper->redirector->gotoSimple('edit', 'pizza', null, ['id' => $pizza_id]);
     }
 
     /**
@@ -131,6 +149,36 @@ class PizzaController extends BaseController
     	}
 
     	return $row;
+    }
+
+    public function addingredientAction()
+    {
+        $pizza_id = $this->_getParam('pizza_id', 1);
+        $pizza = $this->_getPizza($pizza_id);
+
+        //echo ">>>>".$pizza_id;
+
+        $ingredientsTable = new Application_Model_DbTable_Ingredients();
+        $pizzaIngredientsTable = new Application_Model_DbTable_PizzaIngredients();
+        $form_ingredient_add = new Application_Form_IngredientAdd($ingredientsTable->getAllIngredientsForDropdown());
+
+        if ($this->getRequest()->isPost()) {
+            if ($form_ingredient_add->isValid($this->getRequest()->getPost())) {
+
+                $formValues = $form_ingredient_add->getValues();
+
+                $pizzaIngredientsTable->ingredient_id = $formValues['ingredient_id'];
+                $pizzaIngredientsTable->quantity = $formValues['quantity'];
+                $pizzaIngredientsTable->pizza_id = $pizza_id;
+                $pizzaIngredientsTable->insert();
+
+
+                $this->_helper->FlashMessenger(array('message' => 'The pizza ingredient has been successfully saved!!'));
+                return $this->_helper->redirector->gotoSimple('edit', 'pizza', null, ['pizza_id' => $pizza_id]);
+            }
+        }
+
+        $this->view->form_ingredients_add = $form_ingredient_add;
     }
 
 

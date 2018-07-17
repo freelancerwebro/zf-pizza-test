@@ -12,6 +12,9 @@ class Application_Form_Pizza extends Zend_Form
     {       
 
         $this->setMethod('post');
+        //$this->setAttrib('id', 'PizzaAddForm');
+        //$this->setAttrib('name', 'PizzaAddForm');
+        ///$this->setName('add_pizza_form');
 
         $this->addElement('text', 'name', [
             'label'      => 'Name of the pizza:',

@@ -22,6 +22,9 @@ class Application_Form_IngredientAdd extends Zend_Form
     public function init()
     {   
         $this->setMethod('post');
+        $this->setAttrib('id', 'IngredientAddForm');
+        //$this->setAttrib('name', 'IngredientAddForm');
+        //$this->setName('add_ingredient_form');
          
         $this->addElement('select', 'ingredient_id', [
                     'label'      => 'Ingredient:',

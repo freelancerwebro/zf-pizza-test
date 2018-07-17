@@ -17,18 +17,19 @@
 
 	    <?php if(count($this->allPizzaIngredients) > 0): ?>
 
-			<ol class="ol-horizontal">
+			<ol class="ol-horizontal" id="sortableIngredients">
 
 				<?php foreach ($this->allPizzaIngredients as $entry): ?>
 
-					<li>
-						<?php echo $this->escape($entry->ingredient_name) ?>: <?php echo $this->escape($entry->quantity) ?> gr
+					<li class="ui-state-default" data-id="<?php echo $this->escape($entry->id) ?>">
+						<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+						<?php echo $this->escape($entry->ingredient_name) ?>: <?php echo $this->escape($entry->quantity) ?> gr (<?php echo $this->escape($entry->ordering) ?>)
 						
 						-   <a href="<?php echo $this->url(
 								    array(
-								        'controller' => 'pizza',
-								        'action'     => 'delete2',
-								        'id'		 => $this->pizza->id
+								        'controller' 	=> 'pizza',
+								        'action'     	=> 'deleteingredient',
+								        'id'		 	=> $entry['id'],
 								    ),
 								    'default',
 					    	true) ?>" onClick="return confirm('Are you sure you want to delete the pizza?')">delete</a>
@@ -50,7 +51,15 @@
 <div class="well">
 	    <h3>Add ingredient to pizza</h3>
 	    
-	    <?php echo $this->form_ingredients_add ?>
+	    <?php //echo $this->form_ingredients_add ?>
+	    <a href="<?php echo $this->url(
+		    array(
+		        'controller' => 'pizza',
+		        'action'     => 'addingredient',
+		        'pizza_id'		 => $this->pizza->id
+		    ),
+		    'default',
+	    	true) ?>" class="btn btn-primary">Add</a>
 </div>
 
 
